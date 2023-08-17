@@ -1,0 +1,9 @@
+#all_todos {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}

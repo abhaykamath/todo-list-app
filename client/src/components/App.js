@@ -5,15 +5,34 @@ import Add from "./Add";
 import "../styles/App.css";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(
+    localStorage.getItem("todo_app_todos")
+      ? JSON.parse(localStorage.getItem("todo_app_todos"))
+      : []
+  );
+
   function addTodo(new_todo) {
-    setTodos((todos) => [...todos, new_todo]);
+    setTodos((todos) => {
+      let updated_todos = [...todos, new_todo];
+      localStorage.setItem("todo_app_todos", JSON.stringify(updated_todos));
+      return updated_todos;
+    });
   }
+
+  function deleteTodo(index) {
+    setTodos((todos) => {
+      let todos_copy = [...todos];
+      todos_copy.splice(index, 1);
+      localStorage.setItem("todo_app_todos", JSON.stringify(todos_copy));
+      return todos_copy;
+    });
+  }
+
   return (
     <div id="app">
       <div>Todo List App</div>
       <Add addTodo={addTodo} />
-      <Todos todos={todos} />
+      <Todos todos={todos} deleteTodo={deleteTodo} />
     </div>
   );
 }

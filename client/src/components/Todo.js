@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import "../styles/Todo.css";
 
-function Todo({ todo }) {
+function Todo({ index, todo, deleteTodo }) {
   const [strike, setStrike] = useState(false);
+  const [edit, setEdit] = useState(false);
   const completedRef = useRef();
   return (
     <div className="todo-item">
@@ -17,8 +18,38 @@ function Todo({ todo }) {
           }}
         />
       </div>
-      <button>edit</button>
-      <button>delete</button>
+      <div className="button-container">
+        {!edit ? (
+          <button
+            onClick={() => {
+              setEdit(true);
+            }}
+          >
+            edit
+          </button>
+        ) : (
+          ""
+        )}
+        <button
+          onClick={() => {
+            deleteTodo(index);
+          }}
+        >
+          delete
+        </button>
+        {edit ? <button>save</button> : ""}
+        {edit ? (
+          <button
+            onClick={() => {
+              setEdit(false);
+            }}
+          >
+            back
+          </button>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 }

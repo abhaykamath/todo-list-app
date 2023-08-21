@@ -7,12 +7,19 @@ function Add({ addTodo }) {
   }
   return (
     <div>
-      <input ref={inputRef} type="text" id="add_todo_input" placeholder="Type here" />
+      <input
+        ref={inputRef}
+        type="text"
+        id="add_todo_input"
+        placeholder="Type here"
+      />
       <button
         id="add_todo_button"
         onClick={() => {
-          addTodo(inputRef.current.value);
-          clearInput();
+          if (inputRef.current.value !== "") {
+            addTodo({ content: inputRef.current.value, completed: false });
+            clearInput();
+          }
         }}
       >
         Add

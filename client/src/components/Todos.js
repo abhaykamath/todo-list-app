@@ -3,7 +3,7 @@ import Todo from "./Todo";
 
 import "../styles/AllTodos.css";
 
-function Todos({ todos, deleteTodo }) {
+function Todos({ todos, deleteTodo, updateStatus, updateTodo }) {
   return (
     <div id="all_todos">
       {todos.length ? (
@@ -14,6 +14,8 @@ function Todos({ todos, deleteTodo }) {
               index={index}
               todo={todo}
               deleteTodo={deleteTodo}
+              updateStatus={updateStatus}
+              updateTodo={updateTodo}
             />
           );
         })
@@ -22,6 +24,7 @@ function Todos({ todos, deleteTodo }) {
           style={{
             textAlign: "center",
             width: "100%",
+            color: "#ccc",
           }}
         >
           No Todos Yet

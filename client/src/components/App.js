@@ -28,11 +28,34 @@ function App() {
     });
   }
 
+  function updateStatus(index, status) {
+    setTodos((todos) => {
+      let todos_copy = [...todos];
+      todos_copy[index].completed = status;
+      localStorage.setItem("todo_app_todos", JSON.stringify(todos_copy));
+      return todos_copy;
+    });
+  }
+
+  function updateTodo(index, newContent) {
+    setTodos((todos) => {
+      let todos_copy = [...todos];
+      todos_copy[index].content = newContent;
+      localStorage.setItem("todo_app_todos", JSON.stringify(todos_copy));
+      return todos_copy;
+    });
+  }
+
   return (
     <div id="app">
       <div>Todo List App</div>
       <Add addTodo={addTodo} />
-      <Todos todos={todos} deleteTodo={deleteTodo} />
+      <Todos
+        todos={todos}
+        deleteTodo={deleteTodo}
+        updateStatus={updateStatus}
+        updateTodo={updateTodo}
+      />
     </div>
   );
 }

@@ -6,15 +6,17 @@ function Add({ addTodo }) {
     inputRef.current.value = "";
   }
   return (
-    <div>
+    <div id="add-container" className="input-group flex-nowrap">
       <input
         ref={inputRef}
         type="text"
         id="add_todo_input"
         placeholder="Type here"
+        className="form-control"
       />
       <button
         id="add_todo_button"
+        className="btn btn-primary"
         onClick={() => {
           if (inputRef.current.value !== "") {
             addTodo({ content: inputRef.current.value, completed: false });
@@ -22,7 +24,7 @@ function Add({ addTodo }) {
           }
         }}
       >
-        Add
+        <i className="fa-solid fa-plus"></i>
       </button>
     </div>
   );

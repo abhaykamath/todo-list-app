@@ -8,7 +8,7 @@ function Todo({ index, todo, deleteTodo, updateStatus, updateTodo }) {
   const editedContentRef = useRef();
   return (
     <div className="todo-item">
-      <div className="flex-item">{index + 1}.</div>
+      <div className="todo-index flex-item">{index + 1}.</div>
       {!edit ? (
         <div className={`todo-title flex-item ${todo.completed && "strike"}`}>
           {todo.content}
@@ -18,7 +18,7 @@ function Todo({ index, todo, deleteTodo, updateStatus, updateTodo }) {
       )}
       {edit ? (
         <input
-          className="flex-item"
+          className="flex-item form-control"
           ref={editedContentRef}
           placeholder={todo.content}
         />
@@ -26,8 +26,9 @@ function Todo({ index, todo, deleteTodo, updateStatus, updateTodo }) {
         ""
       )}
       <div className="completed-check-box flex-item">
-        <label>completed</label>
+        <label className="form-check-label">completed</label>
         <input
+          className="form-check-input"
           ref={completedRef}
           type="checkbox"
           checked={todo.completed}
@@ -40,24 +41,20 @@ function Todo({ index, todo, deleteTodo, updateStatus, updateTodo }) {
       <div className="button-container flex-item">
         {!edit ? (
           <button
+            className="btn btn-outline-primary"
             onClick={() => {
               setEdit(true);
             }}
           >
+            {/* <i className="fa-solid fa-pen-to-square"></i> */}
             edit
           </button>
         ) : (
           ""
         )}
-        <button
-          onClick={() => {
-            deleteTodo(index);
-          }}
-        >
-          delete
-        </button>
         {edit ? (
           <button
+            className="btn btn-outline-success"
             onClick={() => {
               if (editedContentRef.current.value !== "") {
                 updateTodo(index, editedContentRef.current.value);
@@ -65,6 +62,7 @@ function Todo({ index, todo, deleteTodo, updateStatus, updateTodo }) {
               setEdit(false);
             }}
           >
+            {/* <i className="fa-solid fa-floppy-disk"></i> */}
             save
           </button>
         ) : (
@@ -72,15 +70,24 @@ function Todo({ index, todo, deleteTodo, updateStatus, updateTodo }) {
         )}
         {edit ? (
           <button
+            className="btn btn-light"
             onClick={() => {
               setEdit(false);
             }}
           >
-            back
+            <i className="fa-solid fa-arrow-left"></i>
           </button>
         ) : (
           ""
         )}
+        <button
+          className="delete-button btn btn-outline-danger"
+          onClick={() => {
+            deleteTodo(index);
+          }}
+        >
+          <i className="fa-solid fa-trash"></i>
+        </button>
       </div>
     </div>
   );
